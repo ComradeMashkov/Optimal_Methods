@@ -1,7 +1,7 @@
 clc
-clear all
+clear variables
 close all
-%Метод сопряженных градиентов
+
 
 fnc = @(x) -4 * x(1) * x(2) + 3 * x(1) ^ 2 + 6 * x(2) ^ 2 + 8 * sqrt(5) * x(1) + 4 * sqrt(5) * x(2) + 36;
 Q = [3, -4; -4, 6];
@@ -27,28 +27,29 @@ while norm(grad(xk1, fnc)) > eps && k < Kmax
     lambda =  argmin(f, 0, 2, eps, Kmax);
     xk1 = xk + lambda * pk;
 end
+
 Xmin = xk1;
 path(1, k + 1) = xk1(1);
 path(2, k + 1) = xk1(2);
 path(3, k + 1) = fnc(xk1);
 Fmin = fnc(Xmin);
 
-fprintf('Количество итераций = %d \n', k);
-fprintf('Точка минимума = %e,  %e \n', Xmin(1), Xmin(2));
-fprintf('Минимум функции = %e \n', Fmin);
+fprintf('Number of iterations = %d \n', k);
+fprintf('Minimum point = [%.3f,  %.3f] \n', Xmin(1), Xmin(2));
+fprintf('Function minimum = %.4f \n', Fmin);
 
 hold on
 [X, Y] = meshgrid(-10 : 0.2 : 2);
 Z = -4 .* X .* Y + 3 .* X .^ 2 + 6 .* Y .^ 2 + 8 .* sqrt(5) .* X + 4 .* sqrt(5) .* Y + 36;
-surf(X, Y, Z)
+contour(X, Y, Z, 'LineWidth', 1.5);
 grid on
 grid minor
-plot3(path(1, :), path(2, :), path(3, :),'r', 'LineWidth', 1)
-plot3(path(1, k + 1), path(2, k + 1), path(3, k + 1),'y*', 'LineWidth', 1)
+plot3(path(1, :), path(2, :), path(3, :),'r', 'LineWidth', 1.5)
+plot3(path(1, k + 1), path(2, k + 1), path(3, k + 1),'g*', 'LineWidth', 1.5)
 hold off
 
 function arg = argmin(f, a, b, eps, Kmax)
-        fi = 1.62;
+        fi = (1 + sqrt(5)) / 2;
         kk = 0;
         x1 = b - (b - a) / fi;
         x2 = a + (b - a) / fi;   
