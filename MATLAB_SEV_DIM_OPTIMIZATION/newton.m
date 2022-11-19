@@ -14,17 +14,17 @@ h = 0.001;
 xk = ones(n, 1);
 xk1 = x0;
 Hk = [6, -4; -4, 12];
-grad1 = -([fnc([xk1(1) + h; xk1(2)]); fnc([xk1(1); xk1(2) + h])] - [fnc([xk1(1) - h; xk1(2)]); fnc([xk1(1); xk1(2) - h])]) / 2 / h;
+antigrad1 = -([fnc([xk1(1) + h; xk1(2)]); fnc([xk1(1); xk1(2) + h])] - [fnc([xk1(1) - h; xk1(2)]); fnc([xk1(1); xk1(2) - h])]) / 2 / h;
 
 while abs(fnc(xk) - fnc(xk1)) > eps && norm(xk - xk1) > eps && k < Kmax
     k = k + 1;
     path(1, k) = xk1(1);
     path(2, k) = xk1(2);
     path(3, k) = fnc(xk1);
-    grad = grad1;
+    antigrad = antigrad1;
     xk = xk1;
-    xk1 = xk + inv(Hk) * grad;
-    grad1 = -([fnc([xk1(1) + h; xk1(2)]); fnc([xk1(1); xk1(2) + h])] - [fnc([xk1(1) - h; xk1(2)]); fnc([xk1(1); xk1(2) - h])]) / 2 / h;  
+    xk1 = xk + inv(Hk) * antigrad;
+    antigrad1 = -([fnc([xk1(1) + h; xk1(2)]); fnc([xk1(1); xk1(2) + h])] - [fnc([xk1(1) - h; xk1(2)]); fnc([xk1(1); xk1(2) - h])]) / 2 / h;  
 end
 
 Xmin = xk1;
