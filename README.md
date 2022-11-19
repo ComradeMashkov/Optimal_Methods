@@ -1,5 +1,5 @@
 # Optimal Methods project contains of Module №1 and Module №2
-
+This is my project for course called "Optimal Methods"
 
 ## Module 1 contains following methods: 
 1. Golden Ratio
