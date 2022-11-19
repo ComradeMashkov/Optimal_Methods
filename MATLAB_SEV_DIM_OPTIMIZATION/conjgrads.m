@@ -74,7 +74,7 @@ function arg = argmin(f, a, b, eps, Kmax)
         arg = (a + b) / 2;
 end
     
-function grad = grad(xk, fnc)
+function antigrad = grad(xk, fnc)
     h = 0.001;
-    grad = -([fnc([xk(1) + h; xk(2)]); fnc([xk(1); xk(2) + h])] - [fnc([xk(1) - h; xk(2)]); fnc([xk(1); xk(2) - h])]) / 2 / h;
+    antigrad = -([fnc([xk(1) + h; xk(2)]); fnc([xk(1); xk(2) + h])] - [fnc([xk(1) - h; xk(2)]); fnc([xk(1); xk(2) - h])]) / 2 / h;
 end
