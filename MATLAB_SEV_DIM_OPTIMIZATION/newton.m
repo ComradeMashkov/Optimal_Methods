@@ -3,7 +3,7 @@ clear variables
 close all
 
 fnc = @(x) -4 * x(1) * x(2) + 3 * x(1) ^ 2 + 6 * x(2) ^ 2 + 8 * sqrt(5) * x(1) + 4 * sqrt(5) * x(2) + 36;
-eps = 0.00005;
+eps = 0.05;
 x0 = [-sqrt(5); 0];
 k = 0;
 n = 2;

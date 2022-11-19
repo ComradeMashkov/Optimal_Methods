@@ -4,7 +4,12 @@ close all
 
 
 fnc = @(x) -4 * x(1) * x(2) + 3 * x(1) ^ 2 + 6 * x(2) ^ 2 + 8 * sqrt(5) * x(1) + 4 * sqrt(5) * x(2) + 36;
-Q = [3, -4; -4, 6];
+
+syms x y
+f = -4 * x * y + 3 * x^2 + 6 * y^2 + 8 * sqrt(5) * x + 4 * sqrt(5) * y + 36;
+H = hessian(f, [x, y]);
+Q = double(H);
+
 eps = 0.05;
 x0 = [-sqrt(5); 0];
 k = 0;
