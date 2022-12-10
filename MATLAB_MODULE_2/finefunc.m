@@ -49,7 +49,7 @@ end
 xmin = xk; fmin = fnc(xmin);
 
 fprintf('n = %d\n', k);
-fprintf('xmin = (%f, %f)\n', xmin(1), xmin(2))
+fprintf('xmin = (%e, %e)\n', xmin(1), xmin(2))
 fprintf('fmin = %e \n', fmin);
 
 figure(1)
