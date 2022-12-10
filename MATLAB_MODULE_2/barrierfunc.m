@@ -1,6 +1,5 @@
 clc
 clear variables
-clear all
 close all
 
 tic
@@ -34,7 +33,7 @@ while Flag
             e = zeros(n, 1);
             e(i) = 1;
             f = @(lambda) Fnc(xk_ + lambda*e);
-            lambda =  argmin(f, -2, 2, eps, kmax);
+            lambda =  argmin(f, -3, 3, eps, kmax);
             xk_ = xk_ + lambda*e;
         end
     end

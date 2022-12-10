@@ -1,6 +1,5 @@
 clc
 clear variables
-clear all
 close all
 
 
