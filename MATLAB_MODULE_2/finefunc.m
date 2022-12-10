@@ -4,7 +4,7 @@ clear all
 close all
 
 
-
+tic
 global k, k = 1;
 a = [0; -15]; r = 6;
 g = @(x) max([0, (x(1) - a(1))^2 + (x(2) - a(2))^2 - r^2]);
@@ -74,6 +74,7 @@ YU = YS * r;
 ZU = ZS * r;
 surf(XU + a(1), YU + a(2), ZU - 50)
 
+toc
 
 function arg = argmin(f, a, b, eps, kmax)
     t = (sqrt(5) - 1) / 2;

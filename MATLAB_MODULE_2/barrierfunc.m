@@ -3,7 +3,7 @@ clear variables
 clear all
 close all
 
-
+tic
 
 global k, k = 1;
 global a; global r;
@@ -74,7 +74,7 @@ YU = YS * r;
 ZU = ZS * r;
 surf(XU + a(1), YU + a(2), ZU - 50)
 
-hold off
+toc
 
 function g = g(x)
     global a; global r;

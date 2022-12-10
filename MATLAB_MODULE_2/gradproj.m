@@ -2,6 +2,7 @@ clc
 clear variables
 close all
 
+tic
 % Init
 
 plotCircle = @(center, radius) plot(center(1) + radius * cos(0 : 0.001 : 2 * pi), center(2) + radius * sin(0 : 0.001 : 2 * pi), 'lineWidth', 1.4);
@@ -57,6 +58,7 @@ values = -5 : 0.01 : 2.5;
 Z = -4*X.*Y + 3*X.^2 + 6*Y.^2 + 8*sqrt(5)*X + 4*sqrt(5)*Y + 36;
 contour(X, Y, Z, 'LineWidth', 1.3);
 
+toc
 
 % 2d function
 function f = f(x)
