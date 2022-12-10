@@ -4,13 +4,13 @@ close all
 
 % Init
 
-plotCircle = @(center, radius) plot(center(1) + radius*cos(0:0.001:2*pi), center(2) + radius*sin(0:0.001:2*pi), 'lineWidth',1.4);
+plotCircle = @(center, radius) plot(center(1) + radius * cos(0 : 0.001 : 2 * pi), center(2) + radius * sin(0 : 0.001 : 2 * pi), 'lineWidth', 1.4);
 
 a = -10;
 b = 10;
 radius = 1;
-x0 = [1;0];
-x_current = [0;0];
+x0 = [1; 0];
+x_current = [0; 0];
 x_next = x0;
 eps = 0.001;
 approx = x0';
