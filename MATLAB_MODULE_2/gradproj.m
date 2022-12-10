@@ -49,7 +49,7 @@ plot(approx(:, 1), approx(:, 2), 'r--', 'LineWidth', 1.2);
 title('The sequence of approximations to the minimum point', 'FontSize', 14);
 xlabel('x_1', 'FontSize', 14);
 ylabel('x_2', 'FontSize', 14);
-grid on;
+grid on; grid minor;
 hold on;
 
 % Contour lines
