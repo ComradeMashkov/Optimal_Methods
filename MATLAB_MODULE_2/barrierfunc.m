@@ -9,7 +9,7 @@ global k, k = 1;
 global a; global r;
 a = [0; -15]; r = 6;
 
-fnc = @(x) -4*x(1)*x(2) + 6*x(1)*x(1) + 3*x(2)*x(2) + 4*sqrt(5)*x(1) + 8*sqrt(5)*x(2) + 22;
+fnc = @(x) -4*x(1)*x(2) + 3*x(1)*x(1) + 6*x(2)*x(2) + 8*sqrt(5)*x(1) + 4*sqrt(5)*x(2) + 36;
 Fnc = @(x) fnc(x) - 1/k/g(x);
 
 n = 2;
@@ -53,17 +53,17 @@ figure(1)
 
 
 fprintf('n = %d\n', k);
-fprintf('xmin = (%f, %f)\n', xmin(1), xmin(2))
+fprintf('xmin = (%e, %e)\n', xmin(1), xmin(2))
 fprintf('fmin = %e \n', fmin);
 
 hold on
 [X, Y] = meshgrid(-30 : 0.6 : 10);
-Z = -4 .* X .* Y + 6 .* X .^ 2 + 3 .* Y .^ 2 + 4 .* sqrt(5) .* X + 8 .* sqrt(5) .* Y + 22;
+Z = -4 .* X .* Y + 3 .* X .^ 2 + 6 .* Y .^ 2 + 8 .* sqrt(5) .* X + 4 .* sqrt(5) .* Y + 36;
 mesh(X, Y, Z, FaceAlpha=0.5)
 grid on
 grid minor
 
-plot3(path(:, 1), path(:, 2), path(:, 3), 'r', 'LineWidth', 1.5)
+plot3(path(:, 1), path(:, 2), path(:, 3), 'r--', 'LineWidth', 1.5)
 plot3(path(k, 1), path(k, 2), path(k, 3),'b*', 'LineWidth', 3)
 xmin_actual = [-2.236062e+00,  -4.471998e+00];
 plot3(xmin_actual(1), xmin_actual(2), fnc(xmin_actual), 'g*', 'LineWidth', 3)

@@ -8,12 +8,12 @@ close all
 global k, k = 1;
 a = [0; -15]; r = 6;
 g = @(x) max([0, (x(1) - a(1))^2 + (x(2) - a(2))^2 - r^2]);
-fnc = @(x) -4*x(1)*x(2) + 6*x(1)*x(1) + 3*x(2)*x(2) + 4*sqrt(5)*x(1) + 8*sqrt(5)*x(2) + 22;
+fnc = @(x) -4*x(1)*x(2) + 3*x(1)*x(1) + 6*x(2)*x(2) + 8*sqrt(5)*x(1) + 4*sqrt(5)*x(2) + 36;
 Fnc = @(x) fnc(x) + 1000^k*g(x)*g(x);
 
 n = 2;
 xk1 = zeros(2, 1); xk = a; 
-Eps = 0.001;
+eps = 0.001;
 kmax = 1000;
 path = NaN(kmax, n + 1);
 path(1, :) = [xk', fnc(xk)];
@@ -42,7 +42,7 @@ while Flag
     path(k, :) = [xk', fnc(xk)];
     x(k, :) = xk';
     if mod(k, 2) == 0
-        Flag = (norm(x(k, :) - x(k/2, :)) > Eps);
+        Flag = (norm(x(k, :) - x(k/2, :)) > eps);
     end
 
 end
@@ -56,13 +56,13 @@ figure(1)
 
 hold on
 [X, Y] = meshgrid(-30 : 0.6 : 10);
-Z = -4 .* X .* Y + 6 .* X .^ 2 + 3 .* Y .^ 2 + 4 .* sqrt(5) .* X + 8 .* sqrt(5) .* Y + 22;
+Z = -4 .* X .* Y + 3 .* X .^ 2 + 6 .* Y .^ 2 + 8 .* sqrt(5) .* X + 4 .* sqrt(5) .* Y + 36;
 mesh(X, Y, Z, FaceAlpha=0.5)
 grid on
 grid minor
 
-% plot3(path(:, 1), path(:, 2), path(:, 3), 'y*', 'LineWidth', 1)
-plot3(path(:, 1), path(:, 2), path(:, 3), 'r', 'LineWidth', 1.5)
+plot3(path(:, 1), path(:, 2), path(:, 3), 'y*', 'LineWidth', 1)
+plot3(path(:, 1), path(:, 2), path(:, 3), 'r--', 'LineWidth', 1.5)
 plot3(path(k, 1), path(k, 2), path(k, 3),'b*', 'LineWidth', 3)
 
 xmin_actual = [-2.236062e+00,  -4.471998e+00];
@@ -73,8 +73,6 @@ XU = XS * r;
 YU = YS * r;
 ZU = ZS * r;
 surf(XU + a(1), YU + a(2), ZU - 50)
-
-hold off
 
 
 function arg = argmin(f, a, b, eps, kmax)
