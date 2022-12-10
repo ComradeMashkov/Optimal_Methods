@@ -5,7 +5,7 @@ close all
 
 tic
 global k, k = 1;
-a = [0; -15]; r = 6;
+a = [0; -15]; r = 8;
 g = @(x) max([0, (x(1) - a(1))^2 + (x(2) - a(2))^2 - r^2]);
 fnc = @(x) -4*x(1)*x(2) + 3*x(1)*x(1) + 6*x(2)*x(2) + 8*sqrt(5)*x(1) + 4*sqrt(5)*x(2) + 36;
 Fnc = @(x) fnc(x) + 1000^k*g(x)*g(x);
@@ -17,11 +17,11 @@ eps = 0.001;
 kmax = 1000;
 path = NaN(kmax, n + 1);
 path(1, :) = [xk', fnc(xk)];
-Flag = true; x = zeros(kmax, n); x(1, :) = xk';
+cond = true; x = zeros(kmax, n); x(1, :) = xk';
 
 eps = 0.00001;
 
-while Flag
+while cond
     k = k + 1;
     xk1 = xk;
     
@@ -42,13 +42,13 @@ while Flag
     path(k, :) = [xk', fnc(xk)];
     x(k, :) = xk';
     if mod(k, 2) == 0
-        Flag = (norm(x(k, :) - x(k/2, :)) > eps);
+        cond = (norm(x(k, :) - x(k/2, :)) > eps);
     end
 
 end
 xmin = xk; fmin = fnc(xmin);
 
-fprintf('n = %d\n', k);
+fprintf('Number of approximation steps = %d\n', k);
 fprintf('xmin = (%e, %e)\n', xmin(1), xmin(2))
 fprintf('fmin = %e \n', fmin);
 

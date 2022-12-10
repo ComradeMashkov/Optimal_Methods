@@ -7,7 +7,7 @@ tic
 global k, k = 1;
 global a; 
 global r;
-a = [0; -15]; r = 8;
+a = [0; -15]; r = 6;
 
 fnc = @(x) -4*x(1)*x(2) + 3*x(1)*x(1) + 6*x(2)*x(2) + 8*sqrt(5)*x(1) + 4*sqrt(5)*x(2) + 36;
 Fnc = @(x) fnc(x) - 1/k/g(x);
@@ -15,7 +15,7 @@ Fnc = @(x) fnc(x) - 1/k/g(x);
 n = 2;
 xk1 = zeros(2, 1); 
 xk = a; 
-eps = 0.0001;
+Eps = 0.0001;
 kmax = 1000;
 path = NaN(kmax, n + 1);
 path(1, :) = [xk', fnc(xk)];
@@ -44,7 +44,7 @@ while cond
     path(k, :) = [xk', fnc(xk)];
     x(k, :) = xk';
     if mod(k, 2) == 0
-        cond = (norm(x(k, :) - x(k/2, :)) > eps);
+        cond = (norm(x(k, :) - x(k/2, :)) > Eps);
     end
 
 end
