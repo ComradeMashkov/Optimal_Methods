@@ -2,20 +2,18 @@ clc
 clear variables
 close all
 
+
 tic
-
 global k, k = 1;
-global a; 
-global r;
-a = [1; 0]; r = 1;
-
+a = [0; -15]; r = 8;
+g = @(x) max([0, (x(1) - a(1))^2 + (x(2) - a(2))^2 - r^2]);
 fnc = @(x) -4*x(1)*x(2) + 3*x(1)*x(1) + 6*x(2)*x(2) + 8*sqrt(5)*x(1) + 4*sqrt(5)*x(2) + 36;
-Fnc = @(x) fnc(x) - 1/k/g(x);
+Fnc = @(x) fnc(x) + k*g(x)*g(x);
 
 n = 2;
 xk1 = zeros(2, 1); 
 xk = a; 
-eps = 0.0001;
+eps = 0.001;
 kmax = 1000;
 path = NaN(kmax, n + 1);
 path(1, :) = [xk', fnc(xk)];
@@ -29,17 +27,17 @@ while cond
     
     xk_ = xk;
     xk1_ = xk_ + 2*eps;
-    while norm(xk_ - xk1_) > eps  
+    while norm(xk_ - xk1_) > eps 
         xk1_ = xk_;
         for i = 1 : n
             e = zeros(n, 1);
             e(i) = 1;
             f = @(lambda) Fnc(xk_ + lambda*e);
-            lambda =  argmin(f, -r, r, eps, kmax);
+            lambda =  argmin(f, -4, 4, eps, kmax);
             xk_ = xk_ + lambda*e;
         end
     end
-
+    
     xk = xk_;
     path(k, :) = [xk', fnc(xk)];
     x(k, :) = xk';
@@ -49,23 +47,24 @@ while cond
 
 end
 xmin = xk; fmin = fnc(xmin);
-   
-figure(1)
-
 
 fprintf('Number of approximation steps = %d\n', k);
 fprintf('xmin = (%e, %e)\n', xmin(1), xmin(2))
 fprintf('fmin = %e \n', fmin);
 
+figure(1)
+
 hold on
-[X, Y] = meshgrid(-5 : 0.01 : 5);
+[X, Y] = meshgrid(-30 : 0.6 : 10);
 Z = -4 .* X .* Y + 3 .* X .^ 2 + 6 .* Y .^ 2 + 8 .* sqrt(5) .* X + 4 .* sqrt(5) .* Y + 36;
-contour(X, Y, Z)
+mesh(X, Y, Z, FaceAlpha=0.5);
 grid on
 grid minor
 
+plot3(path(:, 1), path(:, 2), path(:, 3), 'y*', 'LineWidth', 1)
 plot3(path(:, 1), path(:, 2), path(:, 3), 'r--', 'LineWidth', 1.5)
 plot3(path(k, 1), path(k, 2), path(k, 3),'b*', 'LineWidth', 3)
+
 xmin_actual = [-2.233000e+00,  4.464583e+00];
 plot3(xmin_actual(1), xmin_actual(2), fnc(xmin_actual), 'g*', 'LineWidth', 3)
 
@@ -76,14 +75,6 @@ ZU = ZS * r;
 surf(XU + a(1), YU + a(2), ZU - 50)
 
 toc
-
-function g = g(x)
-    global a; global r;
-    g = (x(1) - a(1))^2 + (x(2) - a(2))^2 - r^2;
-    if g > 0 
-        g = -1e-9;
-    end
-end
 
 function arg = argmin(f, a, b, eps, kmax)
     t = (sqrt(5) - 1) / 2;

@@ -7,7 +7,7 @@ tic
 
 plotCircle = @(center, radius) plot(center(1) + radius * cos(0 : 0.001 : 2 * pi), center(2) + radius * sin(0 : 0.001 : 2 * pi), 'lineWidth', 1.4);
 
-a = -10;
+a = 0;
 b = 10;
 radius = 1;
 x0 = [1; 0];

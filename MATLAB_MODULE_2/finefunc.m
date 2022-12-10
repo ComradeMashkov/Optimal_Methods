@@ -5,10 +5,10 @@ close all
 
 tic
 global k, k = 1;
-a = [0; -15]; r = 8;
+a = [1; 0]; r = 1;
 g = @(x) max([0, (x(1) - a(1))^2 + (x(2) - a(2))^2 - r^2]);
 fnc = @(x) -4*x(1)*x(2) + 3*x(1)*x(1) + 6*x(2)*x(2) + 8*sqrt(5)*x(1) + 4*sqrt(5)*x(2) + 36;
-Fnc = @(x) fnc(x) + 1000^k*g(x)*g(x);
+Fnc = @(x) fnc(x) + k*g(x)*g(x);
 
 n = 2;
 xk1 = zeros(2, 1); 
@@ -55,9 +55,9 @@ fprintf('fmin = %e \n', fmin);
 figure(1)
 
 hold on
-[X, Y] = meshgrid(-30 : 0.6 : 10);
+[X, Y] = meshgrid(-5 : 0.01 : 5);
 Z = -4 .* X .* Y + 3 .* X .^ 2 + 6 .* Y .^ 2 + 8 .* sqrt(5) .* X + 4 .* sqrt(5) .* Y + 36;
-mesh(X, Y, Z, FaceAlpha=0.5);
+contour(X, Y, Z);
 grid on
 grid minor
 
