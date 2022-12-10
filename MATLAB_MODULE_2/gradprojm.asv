@@ -62,50 +62,51 @@ contour(X, Y, Z)
 % 2d function
 
 function f = f(x)
-f = -4 * x(1) * x(2) + 3 * x(1)^2 + 6 * x(2)^2 + 8 * sqrt(5) * x(1) + 4 * sqrt(5) * x(2) + 36;
+f = -4*x(1)*x(2)+3*x(1)^2+6*x(2)^2+...
+    8*sqrt(5)*x(1)+4*sqrt(5)*x(2)+36;
 end
 
 % Gradient value in point
 
 function grad = gradient(x)
-grad = zeros(2, 1);
-grad(1) = -4 * x(2) + 6 * x(1) + 8 * sqrt(5);
-grad(2) = -4 * x(1) + 12 * x(2) + 4 * sqrt(5);
+grad = zeros(2,1);
+grad(1) = -4 * x(2) + 12 *x(1)+4*sqrt(5);
+grad(2) = -4*x(1)+6*x(2)+8*sqrt(5);
 end
 
-% Additional 1d function
+%% Вспомогательная одномерная функция
 
-function F = F(alpha, x, p)
-F = f(x + alpha * p);
+function F = F(alpha,x,p)
+F = f(x+alpha*p);
 end
 
-% Golden Ration minimization
+%% Модифицированный под задачу метод золотого сечения
 
-function [alphaMin] = goldenRatioMinimize(x, p, a, b, eps)
+function [alphaMin] = goldenRatioMinimize(x,p,a,b,eps)
 alpha1Factor = (3-sqrt(5))/2;
 alpha2Factor = (sqrt(5)-1)/2;
 doubleEps = 2*eps;
 
 while true
-    alpha1 = a + alpha1Factor*(b - a);
-    alpha2 = a + alpha2Factor*(b - a);
+    alpha1 = a + alpha1Factor*(b-a);
+    alpha2 = a + alpha2Factor*(b-a);
     
-    if F(alpha1,x,p) <= F(alpha2, x, p)
+    if F(alpha1,x,p) <= F(alpha2,x,p)
         b = alpha2;
     else
         a = alpha1;
     end
     
     if b - a < doubleEps
-        alphaMin = (a + b)/2;
+        alphaMin = (a+b)/2;
         break;
     end
 end
 
 end
 
-% Belongs to variety check
+%% Проверка принадлежности точки допустимому множеству 
 
-function value = isPointInsideSet(x, center, radius)
+function value = isPointInsideSet(x,center,radius)
 value = (x(1) - center(1))^2 + (x(2) - center(2))^2 <= radius ^ 2;
 end
