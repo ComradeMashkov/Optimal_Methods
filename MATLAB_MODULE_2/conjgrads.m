@@ -2,16 +2,15 @@ clc
 clear variables
 close all
 
-
-fnc = @(x) -4 * x(1) * x(2) + 3 * x(1) ^ 2 + 6 * x(2) ^ 2 + 8 * sqrt(5) * x(1) + 4 * sqrt(5) * x(2) + 36;
+fnc = @(x) 4 * x(1) * x(2) + 7 * x(1) * x(1) + 4 * x(2) * x(2) + 6 * sqrt(5) * x(1) - 12 * sqrt(5) * x(2) + 51;
 
 syms x y
-f = -4 * x * y + 3 * x^2 + 6 * y^2 + 8 * sqrt(5) * x + 4 * sqrt(5) * y + 36;
+f = 4 * x * y + 7 * x * x + 4 * y * y + 6 * sqrt(5) * x - 12 * sqrt(5) * y + 51;
 H = hessian(f, [x, y]);
 Q = double(H);
 
 eps = 0.05;
-x0 = [-sqrt(5); 0];
+x0 = [0; sqrt(5)];
 k = 0;
 n = 2;
 Kmax = 10 ^ 6;
@@ -39,13 +38,13 @@ path(2, k + 1) = xk1(2);
 path(3, k + 1) = fnc(xk1);
 Fmin = fnc(Xmin);
 
-fprintf('Number of iterations = %d \n', k);
-fprintf('Minimum point = [%.3f,  %.3f] \n', Xmin(1), Xmin(2));
-fprintf('Function minimum = %.4f \n', Fmin);
+fprintf('Число итераций = %d \n', k);
+fprintf('Точка минимума = [%e,  %e] \n', Xmin(1), Xmin(2));
+fprintf('Значение функции в точке = %e \n', Fmin);
 
 hold on
-[X, Y] = meshgrid(-10 : 0.2 : 2);
-Z = -4 .* X .* Y + 3 .* X .^ 2 + 6 .* Y .^ 2 + 8 .* sqrt(5) .* X + 4 .* sqrt(5) .* Y + 36;
+[X, Y] = meshgrid(-10 : 0.2 : 10);
+Z = 4 .* X .* Y + 7 .* X .* X + 4 .* Y .* Y + 6 .* sqrt(5) .* X - 12 .* sqrt(5) .* Y + 51;
 contour(X, Y, Z, 'LineWidth', 1.5);
 grid on
 grid minor
