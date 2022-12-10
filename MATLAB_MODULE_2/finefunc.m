@@ -65,7 +65,7 @@ plot3(path(:, 1), path(:, 2), path(:, 3), 'y*', 'LineWidth', 1)
 plot3(path(:, 1), path(:, 2), path(:, 3), 'r--', 'LineWidth', 1.5)
 plot3(path(k, 1), path(k, 2), path(k, 3),'b*', 'LineWidth', 3)
 
-xmin_actual = [-2.236062e+00,  -4.471998e+00];
+xmin_actual = [-2.233000e+00,  4.464583e+00];
 plot3(xmin_actual(1), xmin_actual(2), fnc(xmin_actual), 'g*', 'LineWidth', 3)
 
 [XS, YS, ZS] = sphere;
