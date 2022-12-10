@@ -11,7 +11,8 @@ fnc = @(x) -4*x(1)*x(2) + 3*x(1)*x(1) + 6*x(2)*x(2) + 8*sqrt(5)*x(1) + 4*sqrt(5)
 Fnc = @(x) fnc(x) + 1000^k*g(x)*g(x);
 
 n = 2;
-xk1 = zeros(2, 1); xk = a; 
+xk1 = zeros(2, 1); 
+xk = a; 
 eps = 0.001;
 kmax = 1000;
 path = NaN(kmax, n + 1);

@@ -5,7 +5,8 @@ close all
 tic
 
 global k, k = 1;
-global a; global r;
+global a; 
+global r;
 a = [0; -15]; r = 6;
 
 fnc = @(x) -4*x(1)*x(2) + 3*x(1)*x(1) + 6*x(2)*x(2) + 8*sqrt(5)*x(1) + 4*sqrt(5)*x(2) + 36;
