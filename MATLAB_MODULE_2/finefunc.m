@@ -56,7 +56,7 @@ figure(1)
 hold on
 [X, Y] = meshgrid(-30 : 0.6 : 10);
 Z = -4 .* X .* Y + 3 .* X .^ 2 + 6 .* Y .^ 2 + 8 .* sqrt(5) .* X + 4 .* sqrt(5) .* Y + 36;
-mesh(X, Y, Z, FaceAlpha=0.5)
+mesh(X, Y, Z, FaceAlpha=0.5);
 grid on
 grid minor
 
